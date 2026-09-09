@@ -1,22 +1,26 @@
-'use client'
-
 import Link from 'next/link'
 
+const categories = [
+  { label: 'Women', href: '/womens' },
+  { label: 'Men', href: '/mens' },
+  { label: 'Dresses', href: '/dresses' },
+  { label: 'New Arrivals', href: '/new-arrivals' },
+  { label: 'Sale', href: '/sale' },
+]
+
 export default function Sidebar() {
-  const categories = ['Dresses', 'Tops', 'Sweaters', 'Jeans', 'Coats', 'Jackets', 'Activewear', 'Shorts']
-  
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md">
-      <h2 className="text-xl font-bold mb-4 text-pink-600">Categories</h2>
-      <ul className="space-y-2">
-        {categories.map((cat) => (
-          <li key={cat}>
-            <Link href="#" className="text-gray-700 hover:text-pink-600">
-              {cat}
+    <aside className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
+      <h2 className="mb-4 text-xl font-black text-gray-900">Categories</h2>
+      <ul className="space-y-1">
+        {categories.map((category) => (
+          <li key={category.href}>
+            <Link href={category.href} className="block rounded-lg px-3 py-2 text-gray-600 transition hover:bg-pink-50 hover:text-pink-600">
+              {category.label}
             </Link>
           </li>
         ))}
       </ul>
-    </div>
+    </aside>
   )
 }

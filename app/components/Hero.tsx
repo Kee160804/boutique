@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 
 /* ─── Main Slider Slides ─────────────────────────────────────────── */
@@ -11,36 +12,36 @@ const slides = [
     subtitle: "GET UP TO 70% OFF ON ALL PRODUCTS",
     description: "Limited time offer on selected items",
     image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1400&h=560&fit=crop",
-    textAlign: "right" as const,
     titleColor: "#e91e8c",
     ctaLabel: "Shop Now",
+    href: "/sale",
   },
   {
     title: "NEW ARRIVALS",
     subtitle: "Discover the latest trends",
-    description: "Summer collection 2024 is here",
+    description: "The new-season collection is here",
     image: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=1400&h=560&fit=crop",
-    textAlign: "right" as const,
     titleColor: "#e91e8c",
     ctaLabel: "Explore Now",
+    href: "/new-arrivals",
   },
   {
     title: "WOMEN'S FASHION",
     subtitle: "Trendy styles for every occasion",
     description: "Up to 50% off on selected items",
     image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1400&h=560&fit=crop",
-    textAlign: "right" as const,
     titleColor: "#e91e8c",
     ctaLabel: "Shop Collection",
+    href: "/womens",
   },
   {
     title: "MEN'S COLLECTION",
     subtitle: "Fresh looks for the season",
     description: "Shop the latest arrivals",
-    image: "https://images.unsplash.com/photo-1617137968427-85924c800c4e?w=1400&h=560&fit=crop",
-    textAlign: "right" as const,
+    image: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=1400&h=560&fit=crop",
     titleColor: "#e91e8c",
     ctaLabel: "Shop Men's",
+    href: "/mens",
   },
 ]
 
@@ -91,8 +92,8 @@ export default function Hero() {
   const slide = slides[currentSlide]
 
   return (
-    <section className="w-full mt-4">
-      <div className="container mx-auto px-4">
+    <section className="w-full pt-4">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         {/* ── Main Hero Slider ── */}
         <div
@@ -101,11 +102,12 @@ export default function Hero() {
           onMouseLeave={() => setIsHovered(false)}
         >
           {/* Full photo — no color overlay */}
-          <div className="relative w-full h-[420px] md:h-[500px]">
+          <div className="relative h-[420px] w-full md:h-[500px]">
             <Image
               src={slide.image}
               alt={slide.title}
               fill
+              sizes="(min-width: 1280px) 1280px, 100vw"
               className="object-cover object-top transition-all duration-700"
               priority
             />
@@ -115,8 +117,8 @@ export default function Hero() {
           </div>
 
           {/* Text block — right-aligned, floating over the image */}
-          <div className="absolute inset-0 flex flex-col items-end justify-center pr-8 md:pr-14 z-10 text-right overflow-hidden">
-            <div className="w-[42%] min-w-[200px] max-w-[320px]">
+          <div className="absolute inset-0 z-10 flex flex-col items-end justify-center overflow-hidden px-8 text-right md:px-14">
+            <div className="w-[58%] min-w-[210px] max-w-[380px] sm:w-[45%]">
               <h2
                 className="text-4xl md:text-5xl font-black leading-tight mb-2 tracking-tight break-words"
                 style={{ color: slide.titleColor }}
@@ -129,11 +131,12 @@ export default function Hero() {
               <p className="text-xs text-gray-600 mb-5">
                 {slide.description}
               </p>
-              <button
+              <Link
+                href={slide.href}
                 className="inline-block bg-gray-900 text-white text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-full hover:bg-pink-600 transition-all duration-300 hover:scale-105"
               >
                 {slide.ctaLabel} →
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -185,6 +188,7 @@ export default function Hero() {
                     src={banner.image}
                     alt={banner.title}
                     fill
+                    sizes="(min-width: 768px) 33vw, 100vw"
                     className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                   />
                   {/* Subtle left fade for text */}

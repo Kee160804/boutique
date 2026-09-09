@@ -1,18 +1,22 @@
-'use client'
+import type { Metadata } from 'next'
+import CollectionPage from '@/app/components/CollectionPage'
+import { getProductsBySubCategory } from '@/app/data/products'
 
-import { useSearchParams } from 'next/navigation'
-import ProductSection from '@/app/components/ProductSection'
+export const metadata: Metadata = { title: 'Dresses' }
 
-export default function DressesPage() {
-  const searchParams = useSearchParams()
-  const subcategory = searchParams.get('sub')
+type DressesPageProps = {
+  searchParams: Promise<{ sub?: string | string[] }>
+}
+
+export default async function DressesPage({ searchParams }: DressesPageProps) {
+  const { sub } = await searchParams
+  const selectedSubcategory = typeof sub === 'string' ? sub.replaceAll('-', ' ') : 'dresses'
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4 text-center bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
-        Dresses {subcategory ? `- ${subcategory.replace(/-/g, ' ')}` : ''}
-      </h1>
-      <ProductSection />
-    </div>
+    <CollectionPage
+      title={selectedSubcategory === 'dresses' ? 'Dresses' : `Dresses · ${selectedSubcategory}`}
+      description="From easy daytime shapes to polished occasion styles, find your next favorite dress."
+      products={getProductsBySubCategory('dresses')}
+    />
   )
 }

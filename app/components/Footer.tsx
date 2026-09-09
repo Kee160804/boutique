@@ -1,50 +1,40 @@
-'use client'
-
 import Link from 'next/link'
+
+const footerLinks = [
+  { title: 'Shop', links: ['New Arrivals', 'Women', 'Men', 'Sale'] },
+  { title: 'Help', links: ['Contact Us', 'Delivery', 'Returns', 'Size Guide'] },
+  { title: 'Company', links: ['About', 'Careers', 'Privacy Policy', 'Terms & Conditions'] },
+]
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white mt-12">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+    <footer className="mt-12 bg-gray-950 text-white">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="grid gap-10 md:grid-cols-[1.3fr_repeat(3,1fr)]">
           <div>
-            <h4 className="font-bold text-lg mb-4 text-pink-400">Information</h4>
-            <ul className="space-y-2">
-              <li><Link href="#" className="text-gray-400 hover:text-pink-400 text-sm">About</Link></li>
-              <li><Link href="#" className="text-gray-400 hover:text-pink-400 text-sm">Delivery</Link></li>
-              <li><Link href="#" className="text-gray-400 hover:text-pink-400 text-sm">Privacy Policy</Link></li>
-              <li><Link href="#" className="text-gray-400 hover:text-pink-400 text-sm">Terms & Conditions</Link></li>
-            </ul>
+            <Link href="/" className="text-2xl font-black tracking-tight text-pink-400">ClothesStore</Link>
+            <p className="mt-4 max-w-xs text-sm leading-6 text-gray-400">
+              Thoughtful fashion, fresh seasonal edits, and easy everyday style in one place.
+            </p>
           </div>
-          <div>
-            <h4 className="font-bold text-lg mb-4 text-pink-400">Customer Service</h4>
-            <ul className="space-y-2">
-              <li><Link href="#" className="text-gray-400 hover:text-pink-400 text-sm">Contact Us</Link></li>
-              <li><Link href="#" className="text-gray-400 hover:text-pink-400 text-sm">Returns</Link></li>
-              <li><Link href="#" className="text-gray-400 hover:text-pink-400 text-sm">Site Map</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-bold text-lg mb-4 text-pink-400">Extras</h4>
-            <ul className="space-y-2">
-              <li><Link href="#" className="text-gray-400 hover:text-pink-400 text-sm">Bistando</Link></li>
-              <li><Link href="#" className="text-gray-400 hover:text-pink-400 text-sm">Gift Vouchers</Link></li>
-              <li><Link href="#" className="text-gray-400 hover:text-pink-400 text-sm">Affiliates</Link></li>
-              <li><Link href="#" className="text-gray-400 hover:text-pink-400 text-sm">Specials</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-bold text-lg mb-4 text-pink-400">My Account</h4>
-            <ul className="space-y-2">
-              <li><Link href="#" className="text-gray-400 hover:text-pink-400 text-sm">My Account</Link></li>
-              <li><Link href="#" className="text-gray-400 hover:text-pink-400 text-sm">Order History</Link></li>
-              <li><Link href="#" className="text-gray-400 hover:text-pink-400 text-sm">Wish List</Link></li>
-              <li><Link href="#" className="text-gray-400 hover:text-pink-400 text-sm">Newsletters</Link></li>
-            </ul>
-          </div>
+
+          {footerLinks.map((section) => (
+            <div key={section.title}>
+              <h2 className="mb-4 font-bold text-white">{section.title}</h2>
+              <ul className="space-y-3">
+                {section.links.map((label) => (
+                  <li key={label}>
+                    <Link href="#" className="text-sm text-gray-400 transition hover:text-pink-400">{label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-        <div className="border-t border-gray-800 pt-6 text-center">
-          <p className="text-gray-500 text-sm">Powered by OpenCart Global Store © 2013</p>
+
+        <div className="mt-10 flex flex-col gap-3 border-t border-gray-800 pt-6 text-sm text-gray-500 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} ClothesStore. All rights reserved.</p>
+          <p>Secure checkout · Easy returns · Friendly support</p>
         </div>
       </div>
     </footer>
